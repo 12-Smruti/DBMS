@@ -1,0 +1,30 @@
+create table employee(emp_id int, emp_name varchar(50),dept_id int, sal number(8,2));
+
+create sequence emp_seq
+start with 1001
+increment by 1
+nocache
+nocycle;
+
+create view Emp_veiw as select emp_name, sal
+from employee;
+
+create index idx_emp on employee(emp_name);
+
+create synonym emp_syn for employee;
+
+create table department (dept_id number, dept_name varchar(50));
+
+alter table employee add constraint fk_dept foreign key (dept_id) REFERENCES department(dept_id);
+
+INSERT INTO employee(emp_id ,emp_name, dept_id, sal) values
+(emp_seq.NextVAL, 'john',101,75000);
+
+insert into department (dept_id, dept_name) values
+(101, 'HR');
+
+select * from emp_veiw;
+select 8 from emp_syn;
+
+desc employee;
+desc department;
